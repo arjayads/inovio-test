@@ -15,6 +15,8 @@ class AlterUsersAddPlanId extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->integer('plan_id')->nullable();
+            $table->dateTime('closed_on')->nullable();
+            $table->string('close_reason')->nullable();
         });
     }
 
@@ -27,6 +29,8 @@ class AlterUsersAddPlanId extends Migration
     {
         Schema::table('users', function ($table) {
             $table->dropColumn('plan_id');
+            $table->dropColumn('closed_on');
+            $table->dropColumn('close_reason');
         });
     }
 }

@@ -22,4 +22,7 @@ Route::group(['namespace' => 'Webhooks', 'prefix' => 'webhooks'], function()
 
 Auth::routes();
 
+Route::get('/account-closed', 'PageController@accountClosed');
+
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/close-account', 'HomeController@closeAccount')->name('closeAccount');

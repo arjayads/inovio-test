@@ -51,8 +51,8 @@ class InovioTester extends Command
 //        $this->testCCREVERSE();
 //        $this->testCCSTATUS();
 //        $this->testRecurring();
-        $this->testSubscribe();
-//        $this->testCancelSubscription();
+//        $this->testSubscribe();
+        $this->testCancelSubscription();
     }
 
     private function testTESTAUTH() {

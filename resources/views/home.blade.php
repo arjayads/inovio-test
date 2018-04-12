@@ -15,6 +15,11 @@
                     @endif
 
                     You are logged in!
+
+                    <form method="POST" action="/close-account">
+                        @csrf
+                        <button class="btn btn-primary">Close Account</button>
+                    </form>
                 </div>
             </div>
         </div>
