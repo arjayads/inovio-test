@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Charge;
+use App\Plan;
 use App\User;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -63,10 +67,52 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
+            'plan_id' => $data['plan'],
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $plan = Plan::find($data['plan']);
+
+        $month = array_search($data['month'], $this->month());
+        $month = str_pad($month, 2, '0', STR_PAD_LEFT);
+
+        $chargeData = [
+            'cust_fname' => $data['name'],
+            'cust_email' => $data['email'],
+            'li_prod_id_1' => $plan->gateway_id,
+            'li_value_1' => $plan->first_charge+0,
+            'li_count_1' => 1,
+            'pmt_numb' => $data['card'],
+            'pmt_key' => $data['cvc'],
+            'pmt_expiry' => $month.'/'.$data['year'],
+        ];
+
+
+//        $response = $user->charge($chargeData);
+        $response = $user->subscribe($user->plan_id, $chargeData);
+
+        if($response) {
+
+            // save charges
+            Charge::create([
+                'user_id' => $user->id,
+                'trans_datetime' => Carbon::now(),
+                'amount' => $response['charge']['TRANS_VALUE'] + 0,
+                'data' => json_encode($response['charge']),
+            ]);
+
+            return $user;
+
+        } else {
+            $user->delete();
+        }
+    }
+
+    private function month() {
+        $info = cal_info(0);
+        return $info['months'];
     }
 }

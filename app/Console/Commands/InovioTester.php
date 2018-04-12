@@ -41,7 +41,7 @@ class InovioTester extends Command
     {
         $this->user = User::find(1);
 
-        $this->testTESTAUTH();
+//        $this->testTESTAUTH();
 //        $this->testTESTGW();
 //        $this->testTokenRequest();
 //        $this->testCCAUTHCAP();
@@ -51,7 +51,7 @@ class InovioTester extends Command
 //        $this->testCCREVERSE();
 //        $this->testCCSTATUS();
 //        $this->testRecurring();
-//        $this->testSubscribe();
+        $this->testSubscribe();
 //        $this->testCancelSubscription();
     }
 
@@ -221,13 +221,22 @@ class InovioTester extends Command
 
     private function testSubscribe() {
 
-        $token = $this->user->createCardToken('4111111111111111');
+//        $token = $this->user->createCardToken('4111111111111111');
+//
+//        $data = [
+//            'li_prod_id_1' => 85098, // configured to support membership
+//            'li_value_1' => 19.95,
+//            'li_count_1' => 1,
+//            'token_guid' => $token['TOKEN_GUID'],
+//        ];
 
         $data = [
             'li_prod_id_1' => 85098, // configured to support membership
             'li_value_1' => 19.95,
             'li_count_1' => 1,
-            'token_guid' => $token['TOKEN_GUID'],
+            'pmt_numb' => '4111111111111111', // Credit Card Number
+            'pmt_key' => '123', // Credit Card CVV2 or CVC2 Code
+            'pmt_expiry' => '04/2020', // Credit Card Expiration Date
         ];
 
         $response = $this->user->subscribe(1, $data);

@@ -1155,12 +1155,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:Plus-Telecom/Inovio.git",
-                "reference": "5063ae33e5c68f33f64634227dcf6dbcac50d953"
+                "reference": "0fb0dc2e20376926e8eb7b77ccc09922c7d5a9fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Plus-Telecom/Inovio/zipball/5063ae33e5c68f33f64634227dcf6dbcac50d953",
-                "reference": "5063ae33e5c68f33f64634227dcf6dbcac50d953",
+                "url": "https://api.github.com/repos/Plus-Telecom/Inovio/zipball/0fb0dc2e20376926e8eb7b77ccc09922c7d5a9fe",
+                "reference": "0fb0dc2e20376926e8eb7b77ccc09922c7d5a9fe",
                 "shasum": ""
             },
             "require": {
@@ -1196,7 +1196,7 @@
                 "source": "https://github.com/Plus-Telecom/Inovio/tree/master",
                 "issues": "https://github.com/Plus-Telecom/Inovio/issues"
             },
-            "time": "2018-04-11 14:09:30"
+            "time": "2018-04-12 11:37:03"
         },
         {
             "name": "psr/container",
