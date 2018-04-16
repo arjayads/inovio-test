@@ -15,11 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['namespace' => 'Webhooks', 'prefix' => 'webhooks'], function()
-{
-    Route::post('/inovio', array('uses' => 'InovioController@handleWebhook'));
-});
-
 Auth::routes();
 
 Route::get('/account-closed', 'PageController@accountClosed');
